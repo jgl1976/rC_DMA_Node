@@ -5,7 +5,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-  response.send('Hello Small Small World! Welcome to the Heroku box. Don dont touch that!!!');
+  response.send('Hello Small Small World! This is a test for roundCorner and Heroku. From Ian, Cid, Don, and John');
 });
 
 app.listen(app.get('port'), function() {
