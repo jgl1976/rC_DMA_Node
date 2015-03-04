@@ -5,7 +5,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-  response.send('I broke it when i called on html as my index... It worked then it didnt.... strange');
+  response.send('jsForce uploaded - this should be a login screen soon....');
 });
 
 app.listen(app.get('port'), function() {
