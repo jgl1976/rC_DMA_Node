@@ -17,11 +17,6 @@ var oauth2 = new jsforce.OAuth2({
   redirectUri : 'https://dma-node.herokuapp.com/oauth2/callback'
 });
 
-
-app.get('/test', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
-
 //
 // Pass received authz code and get access token
 //
@@ -35,9 +30,23 @@ app.get('/oauth2/callback', function(req, res) {
     console.log(conn.accessToken);
     console.log(conn.refreshToken);
     console.log(conn.instanceUrl);
-    console.log("User ID: " + userInfo.id);
-    console.log("Org ID: " + userInfo.organizationId);
-    res.render('index', { title: userInfo.organizationId, message: userInfo.id});
+
+  var records = [];
+  conn.query("SELECT Id, Name FROM Account", function(err, result) {
+    if (err) { return console.error(err); }
+    console.log("total : " + result.totalSize);
+    console.log("fetched : " + result.records.length);
+    console.log("done ? : " + result.done);
+    records.push(result);
+    res.contentType('application/json');
+    res.send(JSON.stringify(records));
+    ///res.render('index', { title: result.totalSize, message: records});
+    if (!result.done) {
+      // you can use the locator to fetch next records set.
+      // Connection#queryMore()
+      console.log("next records URL : " + result.nextRecordsUrl);
+    }
+  });
     // ...
   });
 });
