@@ -1,11 +1,13 @@
-var server = require("server");
-var router = require("router");
-var requestHandlers = require("requestHandlers");
+var express = require('express');
+var app = express();
 
-var handle = {};
-handle["/"] = requestHandlers.start;
-handle["/start"] = requestHandlers.start;
-handle["/upload"] = requestHandlers.upload;
-handle["/show"] = requestHandlers.show;
+app.set('port', (process.env.PORT || 5000));
+app.use(express.static(__dirname + '/public'));
 
-server.start(router.route, handle);
+app.get('/', function(request, response) {
+  response.send('Hello Small Small World!');
+});
+
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'));
+});
