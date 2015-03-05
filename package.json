@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "express": "~4.9.x",
+    "jade": "^1.9.2",
     "jsforce": "^1.4.1"
   },
   "engines": {

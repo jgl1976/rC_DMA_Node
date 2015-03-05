@@ -5,6 +5,11 @@ var jsforce = require('jsforce');
 // Config
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'jade');
+
+app.get('/test', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
+})
 
 // Routes
 app.get('/', function (req, res) {
