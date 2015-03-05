@@ -4,6 +4,11 @@ var jsforce = require('jsforce');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'jade');
+
+app.get('/test', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
+})
 
 app.get('/', function(request, response) {
 
@@ -16,13 +21,11 @@ app.get('/', function(request, response) {
 	    if (err) {
 	     response.send(err); 
 	 	}
-	 	var response = res;
+
+		response.send(res);	  
 
 	  });///end query
 	});
-
-	response.send(response);	  
-
 });
 
 app.listen(app.get('port'), function() {
