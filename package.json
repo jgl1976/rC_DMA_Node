@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js"
   },
- "dependencies": {
+  "dependencies": {
     "express": "~4.9.x",
     "jsforce": "^1.4.1"
   },
