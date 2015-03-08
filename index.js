@@ -36,12 +36,22 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
   });
 
   var records = [];
+  conn.sobject("Opportunity").describe(function(err, meta) {
+    if (err) { return console.error(err); }
+    console.log('Label : ' + meta.label);
+    console.log('Num of Fields : ' + meta.fields.length);
+    records.push(meta);
+    res.contentType('application/json');
+    res.send(JSON.stringify(records));
+  });
+  
+ /* var records = [];
   conn.query("SELECT Id, Amount FROM Opportunity", function(err, result) {
     if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
     console.log("done ? : " + result.done);
-    records.push(result);
+    records.push(result.records);
     res.contentType('application/json');
     res.send(JSON.stringify(records));
     if (!result.done) {
@@ -49,7 +59,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
       // Connection#queryMore()
       console.log("next records URL : " + result.nextRecordsUrl);
     }
-  });
+  });*/
 });
 
 //
