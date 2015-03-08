@@ -54,9 +54,9 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
     console.log("done ? : " + result.done);
-    records.push(result.records);
+    results.push(result.records);
     res.contentType('application/json');
-    res.send(JSON.stringify(records));
+    res.send(JSON.stringify(results));
     if (!result.done) {
       // you can use the locator to fetch next records set.
       // Connection#queryMore()
