@@ -35,12 +35,16 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
     accessToken : accessToken
   });
 
-  var records = [];
+  var records = "";
+  var arrayrec = [];
+
   conn.sobject("Opportunity").describe(function(err, meta) {
     if (err) { return console.error(err); }
     var items = meta['fields'];
     for(var i=0, l = items.length; i < l; i++){
-        records.push(items[i].name);
+      records .= ",";
+      records .= ""+items[i].name+"";
+      arrayrec.push(items[i].name);
     }
     res.contentType('application/json');
     res.send(records);
