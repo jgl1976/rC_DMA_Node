@@ -38,7 +38,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
   var records = [];
   conn.sobject("Opportunity").describe(function(err, meta) {
     if (err) { return console.error(err); }
-    var json = JSON.stringify(meta.fields);
+    var json = JSON.stringify(meta.fields.name);
     console.log('Label : ' + meta.label);
     console.log('Num of Fields : ' + meta.fields.length);
     records.push(json);
