@@ -48,7 +48,10 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
     }
   });
 
-  var results = [];
+  res.contentType('application/json');
+  res.send(records);
+
+  /*var results = [];
   conn.query("SELECT "+records+" FROM Accounts", function(err, meta) {
     if (err) { return console.error(err); }
     console.log("total : " + meta.totalSize);
@@ -62,7 +65,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
       // Connection#queryMore()
       console.log("next records URL : " + meta.nextRecordsUrl);
     }
-  });
+  });*/
 });
 
 //
