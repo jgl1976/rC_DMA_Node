@@ -48,9 +48,10 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
       records += ""+items[i].name+"";
       arrayrec.push(items[i].name);
     }
+  });
+
     res.contentType('application/json');
     res.send(records);
-  });
 
  /* var records = [];
   conn.query("SELECT Id, Amount FROM Opportunity", function(err, result) {
