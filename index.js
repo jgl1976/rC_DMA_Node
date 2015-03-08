@@ -48,26 +48,27 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
       records += ""+items[i].name+"";
       arrayrec.push(items[i].name);
     }
+      var jsonresults = [];
+        conn.query("SELECT "+records+" FROM Opportunity", function(err, result) {
+          if (err) { return console.error(err); }
+          console.log("total : " + result.totalSize);
+          console.log("fetched : " + result.records.length);
+          console.log("done ? : " + result.done);
+          jsonresults.push(result.records);
+          res.contentType('application/json');
+          res.send(records);
+          if (!result.done) {
+            // you can use the locator to fetch next records set.
+            // Connection#queryMore()
+            console.log("next records URL : " + result.nextRecordsUrl);
+          }
+        })
+
   });
 
-  res.contentType('application/json');
-  res.send(records);
 
- /* var records = [];
-  conn.query("SELECT Id, Amount FROM Opportunity", function(err, result) {
-    if (err) { return console.error(err); }
-    console.log("total : " + result.totalSize);
-    console.log("fetched : " + result.records.length);
-    console.log("done ? : " + result.done);
-    records.push(result.records);
-    res.contentType('application/json');
-    res.send(JSON.stringify(records));
-    if (!result.done) {
-      // you can use the locator to fetch next records set.
-      // Connection#queryMore()
-      console.log("next records URL : " + result.nextRecordsUrl);
-    }
-  });*/
+
+ /* ;*/
 });
 
 //
