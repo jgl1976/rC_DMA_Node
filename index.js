@@ -17,6 +17,14 @@ var oauth2 = new jsforce.OAuth2({
   redirectUri : 'https://dma-node.herokuapp.com/oauth2/callback'
 });
 
+app.get('/', function(request, res) { /// root get index template
+  res.render('index', {}); /// render index.jade
+});
+
+app.get('/login', function(request, res) {/// login to sales force
+  res.redirect(oauth2.getAuthorizationUrl({ scope : 'api id web' })); /// oauth2 salesforce
+});
+
 //
 // Pass received authz code and get access token
 //
@@ -40,19 +48,14 @@ app.get('/oauth2/callback', function(req, res) {
     records.push(result);
     res.contentType('application/json');
     res.send(JSON.stringify(records));
-    ///res.render('index', { title: result.totalSize, message: records});
     if (!result.done) {
       // you can use the locator to fetch next records set.
       // Connection#queryMore()
       console.log("next records URL : " + result.nextRecordsUrl);
     }
   });
-    // ...
-  });
-});
 
-app.get('/', function(request, res) {
-  res.redirect(oauth2.getAuthorizationUrl({ scope : 'api id web' }));
+  });
 });
 
 app.listen(app.get('port'), function() {

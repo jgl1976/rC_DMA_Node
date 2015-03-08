@@ -1,5 +1,12 @@
-html
+doctype html
+html(lang='en')
   head
-    title!= title
+    link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
   body
-    h1!= message
+    h1 DMA Node
+    .container
+      form.form-signin
+        h2.form-signin-heading Please sign in
+        button.btn.btn-large.btn-primary(type='submit') Log in
+
