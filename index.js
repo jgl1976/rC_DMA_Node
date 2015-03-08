@@ -32,7 +32,7 @@ app.get('/oauth2/callback', function(req, res) {
     console.log(conn.instanceUrl);
 
   var records = [];
-  conn.query("SELECT Id, Name, CreatedBy FROM Account", function(err, result) {
+  conn.query("SELECT Id, Name FROM Account", function(err, result) {
     if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
