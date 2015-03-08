@@ -6,6 +6,10 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 
+var accessToken = "";
+var refreshToken = "";
+var instanceUrl = "";
+
 //
 // OAuth2 client information can be shared with multiple connections.
 //
@@ -25,19 +29,11 @@ app.get('/login', function(request, res) {/// login to sales force
   res.redirect(oauth2.getAuthorizationUrl({ scope : 'api id web' })); /// oauth2 salesforce
 });
 
-//
-// Pass received authz code and get access token
-//
-app.get('/oauth2/callback', function(req, res) {
-  var conn = new jsforce.Connection({ oauth2 : oauth2 });
-  var code = req.param('code');
-  conn.authorize(code, function(err, userInfo) {
-    if (err) { return console.error(err); }
-    // Now you can get the access token, refresh token, and instance URL information.
-    // Save them to establish connection next time.
-    console.log(conn.accessToken);
-    console.log(conn.refreshToken);
-    console.log(conn.instanceUrl);
+app.get('/index', function(request, res) {/// Onced logged in get query stuff
+  var conn = new jsforce.Connection({
+    instanceUrl : instanceUrl,
+    accessToken : accessToken
+  });
 
   var records = [];
   conn.query("SELECT Id, Amount FROM Opportunity", function(err, result) {
@@ -54,6 +50,23 @@ app.get('/oauth2/callback', function(req, res) {
       console.log("next records URL : " + result.nextRecordsUrl);
     }
   });
+});
+
+//
+// Pass received authz code and get access token
+//
+app.get('/oauth2/callback', function(req, res) {
+  var conn = new jsforce.Connection({ oauth2 : oauth2 });
+  var code = req.param('code');
+  conn.authorize(code, function(err, userInfo) {
+    if (err) { return console.error(err); }
+    // Now you can get the access token, refresh token, and instance URL information.
+    // Save them to establish connection next time.
+    accessToken = conn.accessToken;
+    refreshToken = conn.refreshToken;
+    instanceUrl = conn.instanceUrl;
+
+    res.redirect('/index');
 
   });
 });
