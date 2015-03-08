@@ -37,7 +37,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
 
   var records = ""; /// string for query
 
-  conn.sobject("Accounts").describe(function(err, meta) {
+  conn.sobject("Opportunities").describe(function(err, meta) {
     if (err) { return console.error(err); }
     var items = meta['fields'];
     for(var i=0, l = items.length; i < l; i++){
