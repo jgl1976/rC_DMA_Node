@@ -65,10 +65,6 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
         })
 
   });
-
-
-
- /* ;*/
 });
 
 //
@@ -84,9 +80,7 @@ app.get('/oauth2/callback', function(req, res) {
     accessToken = conn.accessToken;
     refreshToken = conn.refreshToken;
     instanceUrl = conn.instanceUrl;
-
-    res.redirect('/index');
-
+    res.redirect('/index');/// redirect to index 
   });
 });
 
