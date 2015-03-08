@@ -50,8 +50,8 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
     }
   });
 
-    res.contentType('application/json');
-    res.send(records);
+  res.contentType('application/json');
+  res.send(records);
 
  /* var records = [];
   conn.query("SELECT Id, Amount FROM Opportunity", function(err, result) {
