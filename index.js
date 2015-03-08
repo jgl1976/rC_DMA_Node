@@ -43,7 +43,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
     console.log('Num of Fields : ' + meta.fields.length);
     records.push(json);
     res.contentType('application/json');
-    res.send(meta['fields']['name']);
+    res.send(meta['fields']);
   });
 
  /* var records = [];
