@@ -56,8 +56,8 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
           console.log("done ? : " + result.done);
           jsonresults.push(result.records);
           res.render('table_layout', {}); /// render index.jade
-          res.contentType('application/json');
-          res.send(jsonresults);
+          //res.contentType('application/json');
+          ///res.send(jsonresults);
           if (!result.done) {
             // you can use the locator to fetch next records set.
             // Connection#queryMore()
