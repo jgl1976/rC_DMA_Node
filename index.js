@@ -31,8 +31,8 @@ app.get('/oauth2/callback', function(req, res) {
     console.log(conn.refreshToken);
     console.log(conn.instanceUrl);
 
-  var records = [2];
-  conn.query("SELECT Id, Amount, Account FROM Opportunity", function(err, result) {
+  var records = [];
+  conn.query("SELECT Id, Amount FROM Opportunity", function(err, result) {
     if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
