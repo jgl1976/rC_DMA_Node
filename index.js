@@ -49,18 +49,18 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
   });
 
   var results = [];
-  conn.query("SELECT "+records+" FROM Accounts", function(err, result) {
+  conn.query("SELECT "+records+" FROM Accounts", function(err, meta) {
     if (err) { return console.error(err); }
-    console.log("total : " + result.totalSize);
-    console.log("fetched : " + result.records.length);
-    console.log("done ? : " + result.done);
-    results.push(result.records);
+    console.log("total : " + meta.totalSize);
+    console.log("fetched : " + meta.records.length);
+    console.log("done ? : " + meta.done);
+    results.push(meta.records);
     res.contentType('application/json');
-    res.send(JSON.stringify(results));
-    if (!result.done) {
+    res.send(results);
+    if (!meta.done) {
       // you can use the locator to fetch next records set.
       // Connection#queryMore()
-      console.log("next records URL : " + result.nextRecordsUrl);
+      console.log("next records URL : " + meta.nextRecordsUrl);
     }
   });
 });
