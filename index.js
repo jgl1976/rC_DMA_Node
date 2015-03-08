@@ -37,7 +37,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
 
   var records = ""; /// string for query
 
-  conn.sobject("Opportunity").describe(function(err, meta) {
+  conn.sobject("Accounts").describe(function(err, meta) {
     if (err) { return console.error(err); }
     var items = meta['fields'];
     for(var i=0, l = items.length; i < l; i++){
@@ -49,7 +49,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
   });
 
   var results = [];
-  conn.query("SELECT "+records+" FROM Opportunity", function(err, result) {
+  conn.query("SELECT "+records+" FROM Accounts", function(err, result) {
     if (err) { return console.error(err); }
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
