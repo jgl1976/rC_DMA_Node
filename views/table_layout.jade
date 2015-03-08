@@ -1,126 +1,134 @@
-.btn-group
-    button#get-selections.btn.btn-default
-        | Get Selections
-      |     
-      button#get-data.btn.btn-default(data-method='getData')
-        | Get Data
-      |     
-      button#load-data.btn.btn-default(data-method='load')
-        | Load Data
-      |     
-      button#append-data.btn.btn-default(data-method='append')
-        | Append Data
-      |     
-      button#remove-data.btn.btn-default(data-method='remove')
-        | Remove Data
-      |     
-      button#update-row.btn.btn-default(data-method='updateRow')
-        | Update Row
-      |     
-      button#merge-cells.btn.btn-default
-        | Merge Cells
-      |     
-      button#check-all.btn.btn-default(data-method='checkAll')
-        | Check All
-      |     
-      button#uncheck-all.btn.btn-default(data-method='uncheckAll')
-        | Uncheck All
-      |     
-      button#show-loading.btn.btn-default(data-method='showLoading')
-        | Show Loading
-      |     
-      button#hide-loading.btn.btn-default(data-method='hideLoading')
-        | Hide Loading
-      |     
-      button#refresh.btn.btn-default(data-method='refresh')
-        | Refresh
-      |     
-      button#show-column.btn.btn-default(data-method='showColumn')
-        | Show Column
-      |     
-      button#hide-column.btn.btn-default(data-method='hideColumn')
-        | Hide Column
-    table#table-methods-table(data-height='299')
-      thead
-        tr
-          th(data-field='state', data-checkbox='true')
-          |         
-          th(data-field='id') Item ID
-          |         
-          th(data-field='name') Item Name
-          |         
-          th(data-field='price') Item Price
-    script.
-      $(function () {
-      $('#table-methods').next().click(function () {
-      $(this).hide();
-      var id = 0,
-      getRows = function () {
-      var rows = [];
-      for (var i = 0; i < 10; i++) {
-      rows.push({
-      id: id,
-      name: 'test' + id,
-      price: '$' + id
-      });
-      id++;
-      }
-      return rows;
-      },
-      // init table use data
-      $table = $('#table-methods-table').bootstrapTable({
-      data: getRows()
-      });
-      $('#get-selections').click(function () {
-      alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
-      });
-      $('#get-data').click(function () {
-      alert('current data: ' + JSON.stringify($table.bootstrapTable('getData')));
-      });
-      // This demonstrates utilizing the data-method attribute to use one
-      //     jQuery handler to execute multiple methods.
-      // ($this).data('method') retrieves the value of the data-method
-      //     attribute of the object that was clicked which is then passed to
-      //     the bootstrapTable function.
-      // Only the load and append methods require a parameter
-      $('#load-data, #append-data, #check-all, #uncheck-all, ' +
-      '#show-loading, #hide-loading').click(function () {
-      $table.bootstrapTable($(this).data('method'), getRows());
-      });
-      $('#refresh').click(function () {
-      $table.bootstrapTable('refresh', {
-      url: 'data1.json'
-      });
-      });
-      $('#remove-data').click(function () {
-      var selects = $table.bootstrapTable('getSelections');
-      ids = $.map(selects, function (row) {
-      return row.id;
-      });
-      $table.bootstrapTable('remove', {
-      field: 'id',
-      values: ids
-      });
-      });
-      $('#update-row').click(function () {
-      $table.bootstrapTable('updateRow', {
-      index: 1,
-      row: {
-      name: 'test111111',
-      price: '$111111'
-      }
-      });
-      });
-      $('#merge-cells').click(function () {
-      $table.bootstrapTable('mergeCells', {
-      index: 1,
-      field: 'name',
-      colspan: 2,
-      rowspan: 3
-      })
-      });
-      $('#show-column, #hide-column').click(function () {
-      $table.bootstrapTable($(this).data('method'), 'id');
-      });
-      });
-      });
+doctype html
+html(lang='en')
+  head
+    link(href='/public/css/bootstrap.min.css', rel='stylesheet')
+    script(src='/public/js/bootstrap.min.js')
+  body
+    .container
+      h1 DMA Node
+      .btn-group
+        button#get-selections.btn.btn-default
+            | Get Selections
+          |     
+          button#get-data.btn.btn-default(data-method='getData')
+            | Get Data
+          |     
+          button#load-data.btn.btn-default(data-method='load')
+            | Load Data
+          |     
+          button#append-data.btn.btn-default(data-method='append')
+            | Append Data
+          |     
+          button#remove-data.btn.btn-default(data-method='remove')
+            | Remove Data
+          |     
+          button#update-row.btn.btn-default(data-method='updateRow')
+            | Update Row
+          |     
+          button#merge-cells.btn.btn-default
+            | Merge Cells
+          |     
+          button#check-all.btn.btn-default(data-method='checkAll')
+            | Check All
+          |     
+          button#uncheck-all.btn.btn-default(data-method='uncheckAll')
+            | Uncheck All
+          |     
+          button#show-loading.btn.btn-default(data-method='showLoading')
+            | Show Loading
+          |     
+          button#hide-loading.btn.btn-default(data-method='hideLoading')
+            | Hide Loading
+          |     
+          button#refresh.btn.btn-default(data-method='refresh')
+            | Refresh
+          |     
+          button#show-column.btn.btn-default(data-method='showColumn')
+            | Show Column
+          |     
+          button#hide-column.btn.btn-default(data-method='hideColumn')
+            | Hide Column
+        table#table-methods-table(data-height='299')
+          thead
+            tr
+              th(data-field='state', data-checkbox='true')
+              |         
+              th(data-field='id') Item ID
+              |         
+              th(data-field='name') Item Name
+              |         
+              th(data-field='price') Item Price
+        script.
+          $(function () {
+          $('#table-methods').next().click(function () {
+          $(this).hide();
+          var id = 0,
+          getRows = function () {
+          var rows = [];
+          for (var i = 0; i < 10; i++) {
+          rows.push({
+          id: id,
+          name: 'test' + id,
+          price: '$' + id
+          });
+          id++;
+          }
+          return rows;
+          },
+          // init table use data
+          $table = $('#table-methods-table').bootstrapTable({
+          data: getRows()
+          });
+          $('#get-selections').click(function () {
+          alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
+          });
+          $('#get-data').click(function () {
+          alert('current data: ' + JSON.stringify($table.bootstrapTable('getData')));
+          });
+          // This demonstrates utilizing the data-method attribute to use one
+          //     jQuery handler to execute multiple methods.
+          // ($this).data('method') retrieves the value of the data-method
+          //     attribute of the object that was clicked which is then passed to
+          //     the bootstrapTable function.
+          // Only the load and append methods require a parameter
+          $('#load-data, #append-data, #check-all, #uncheck-all, ' +
+          '#show-loading, #hide-loading').click(function () {
+          $table.bootstrapTable($(this).data('method'), getRows());
+          });
+          $('#refresh').click(function () {
+          $table.bootstrapTable('refresh', {
+          url: 'data1.json'
+          });
+          });
+          $('#remove-data').click(function () {
+          var selects = $table.bootstrapTable('getSelections');
+          ids = $.map(selects, function (row) {
+          return row.id;
+          });
+          $table.bootstrapTable('remove', {
+          field: 'id',
+          values: ids
+          });
+          });
+          $('#update-row').click(function () {
+          $table.bootstrapTable('updateRow', {
+          index: 1,
+          row: {
+          name: 'test111111',
+          price: '$111111'
+          }
+          });
+          });
+          $('#merge-cells').click(function () {
+          $table.bootstrapTable('mergeCells', {
+          index: 1,
+          field: 'name',
+          colspan: 2,
+          rowspan: 3
+          })
+          });
+          $('#show-column, #hide-column').click(function () {
+          $table.bootstrapTable($(this).data('method'), 'id');
+          });
+          });
+          });

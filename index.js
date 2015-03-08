@@ -55,6 +55,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
           console.log("fetched : " + result.records.length);
           console.log("done ? : " + result.done);
           jsonresults.push(result.records);
+          res.render('table_layout', {}); /// render index.jade
           res.contentType('application/json');
           res.send(jsonresults);
           if (!result.done) {
