@@ -38,9 +38,9 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
   var records = [];
   conn.sobject("Opportunity").describe(function(err, meta) {
     if (err) { return console.error(err); }
-    for (var s of meta['fields'])
-    {
-      records.push(s.name);
+    var items = meta['fields'];
+    for(var i=0, l = items.length; i < l; i++){
+        records.push(items[i].name);
     }
     res.contentType('application/json');
     res.send(records);
