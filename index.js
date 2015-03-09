@@ -16,8 +16,8 @@ var instanceUrl = "";
 var oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
   // loginUrl : 'https://test.salesforce.com',
-  clientId : '3MVG9fMtCkV6eLhePwBjNw.lHHuAXPkLhDivF6di2chfNNQq2SNUn9qX0a.phDXUj2TaAvOcJ4BolLqqiSluH',
-  clientSecret : '1519327188401123285',
+  clientId : '3MVG9A2kN3Bn17hvZc9nekjyHNoZI732S5MWbq2kMdJDrpKZR5jjym37eELSpIoEUPzYQaDtjI7sD_GlTlCbk',
+  clientSecret : '4281366282980209317',
   redirectUri : 'https://dma-node.herokuapp.com/oauth2/callback'
 });
 
