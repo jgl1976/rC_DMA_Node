@@ -38,7 +38,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
   var records = "";
   var arrayrec = [];
 
-  conn.sobject("Account").describe(function(err, meta) {
+  conn.sobject("Contact").describe(function(err, meta) {
     if (err) { return console.error(err); }
     var items = meta['fields'];
     for(var i=0, l = items.length; i < l; i++){
@@ -49,7 +49,7 @@ app.get('/index', function(request, res) {/// Onced logged in get query stuff
       arrayrec.push(items[i].name);
     }
       var jsonresults = [];
-        conn.query("SELECT "+records+" FROM Account", function(err, result) {
+        conn.query("SELECT "+records+" FROM Contact", function(err, result) {
           if (err) { return console.error(err); }
           console.log("total : " + result.totalSize);
           console.log("fetched : " + result.records.length);
